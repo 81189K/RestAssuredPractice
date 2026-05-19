@@ -11,10 +11,10 @@ import static io.restassured.RestAssured.*;
 
 public class DynamicPayloadWithExternalInputs {
 
-	@Test
-	public void addBook() {
+	@Test(dataProvider="AddBooksData")
+	public void addBook(String isbn, String aisle) {
 		RestAssured.baseURI = "http://216.10.245.166";
-		String response = given().header("ContentType", "appplication/json").body(LibraryPayload.addBook("asdf", "1234"))
+		String response = given().header("ContentType", "appplication/json").body(LibraryPayload.addBook(isbn, aisle))
 		.when().post("/Library/Addbook.php")
 		.then().log().all().assertThat().statusCode(200).extract().response().asString();
 		
