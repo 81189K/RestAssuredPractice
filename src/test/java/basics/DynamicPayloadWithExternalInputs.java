@@ -1,5 +1,6 @@
 package basics;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
@@ -20,5 +21,10 @@ public class DynamicPayloadWithExternalInputs {
 		JsonPath js = new JsonPath(response);
 		String bookID = js.get("ID");
 		System.out.println("Book ID: " + bookID);
+	}
+	
+	@DataProvider(name="AddBooksData")
+	public Object[][] getBooksData() {
+		return new Object[][] { {"asdf", "1010"}, {"qwer", "2121"}, {"zxcv", "3131"} }; // creation & initialization
 	}
 }
