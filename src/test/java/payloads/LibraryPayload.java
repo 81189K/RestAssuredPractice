@@ -10,4 +10,10 @@ public class LibraryPayload {
 				+ "    \"author\": \"Johnson\"\r\n"
 				+ "}";
 	}
+	
+	public static String deleteBook(String isbn, String aisle) {
+		return "{\r\n"
+				+ "    \"ID\": \""+isbn+aisle+"\"\r\n"
+				+ "}";
+	}
 }
