@@ -1,6 +1,15 @@
-target/
-.classpath
+# Eclipse
 .project
+.classpath
 .settings/
 
+# Maven
+target/
+
+# Environment files
+.env
+*.env
+
 test-output
+
+bin/
