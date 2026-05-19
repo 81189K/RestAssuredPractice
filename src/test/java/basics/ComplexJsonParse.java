@@ -1,13 +1,15 @@
 package basics;
 
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import io.restassured.path.json.JsonPath;
 import payloads.CoursesMockResponse;
 
 public class ComplexJsonParse {
 	
-	public static void main(String[] args) {
+	@Test
+	public void test() {
 		JsonPath js = new JsonPath(CoursesMockResponse.courseDetails());
 		
 		// Print no. of courses

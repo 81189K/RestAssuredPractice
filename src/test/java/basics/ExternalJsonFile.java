@@ -9,6 +9,7 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
+import utils.EnvReader;
 
 public class ExternalJsonFile {
 	
@@ -22,7 +23,7 @@ public class ExternalJsonFile {
                 )
         );
 
-        RestAssured.baseURI = "https://rahulshettyacademy.com";
+        RestAssured.baseURI = EnvReader.get("BASE_URL");
 
         given()
                 .log().all()

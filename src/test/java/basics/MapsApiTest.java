@@ -3,15 +3,18 @@ package basics;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import payloads.MapsPayload;
+import utils.EnvReader;
 
 import static io.restassured.RestAssured.*;
 
 import org.hamcrest.Matchers;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class MapsApiTest {
 
-	public static void main(String[] args) {
+	@Test
+	public void main() {
 		
 		//given - all input details
 		//when - Submit the API -resource, http method
@@ -19,7 +22,7 @@ public class MapsApiTest {
 		
 		
 		//AddPlace
-		RestAssured.baseURI = "https://rahulshettyacademy.com";
+		RestAssured.baseURI = EnvReader.get("BASE_URL");
 		String response = given().log().all().queryParam("key", "qaclick123").header("Content-Type","application/json") //log().all() - logs into console
 							.body(MapsPayload.addPlace()) // moved the payload into a separate class
 						.when().post("maps/api/place/add/json")

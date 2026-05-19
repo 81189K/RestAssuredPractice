@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import payloads.LibraryPayload;
+import utils.EnvReader;
 
 import static io.restassured.RestAssured.*;
 
@@ -14,7 +15,7 @@ public class DynamicPayloadWithExternalInputs {
 
 	@Test(dataProvider="BooksData")
 	public void addBook(String isbn, String aisle) {
-		RestAssured.baseURI = "http://216.10.245.166";
+		RestAssured.baseURI = EnvReader.get("LIB_BASE_URL");
 		String response = given()./*log().all().*/header("ContentType", "appplication/json").body(LibraryPayload.addBook(isbn, aisle))
 		.when().post("/Library/Addbook.php")
 		.then()./*log().all().*/assertThat().statusCode(200).extract().response().asString();
@@ -27,7 +28,7 @@ public class DynamicPayloadWithExternalInputs {
 	
 	@Test(dataProvider="BooksData")
 	public void deleteBook(String isbn, String aisle) {
-		RestAssured.baseURI = "http://216.10.245.166";
+		RestAssured.baseURI = EnvReader.get("LIB_BASE_URL");
 		String response = given().header("ContentType","appliction/json").body(LibraryPayload.deleteBook(isbn, aisle))
 		.when().delete("/Library/DeleteBook.php")
 		.then().assertThat().statusCode(200).extract().response().asPrettyString();
